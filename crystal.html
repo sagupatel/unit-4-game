@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test^2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<style>
+    .crystal-image {
+    width: 100px;
+    height: 100px;
+    margin-left: 6%
+   
+}
+</style>
+
+</style>
+
+<body>
+    <div class="jumbotron">
+        <h1 class="display-4">THE TEST OF TESTS</h1>
+        <p class="lead">Click, then click again.  Then keep clicking.  Match the number and you shall pass the test of tests!</p>
+    </div>
+    <h3>To pass, you must match this number: <span id="number-to-guess"></span></h3>
+
+    <div id="crystals">
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        var targetNumber = [Math.floor(Math.random() * 121)];
+        var imagesArr = ["./images/flawlessDiamond.png", "./images/redDiamond.png", "./images/ruby.jpg", "./images/sapphire.jpg"]
+
+
+        $("#number-to-guess").text(targetNumber);
+
+        var counter = 0;
+        var numberOptions = [Math.floor(Math.random() * 12) + 1, Math.floor(Math.random() * 12) + 1, Math.floor(Math.random() * 12) + 1, Math.floor(Math.random() * 12) + 1]
+        for (var i = 0; i < 4; i++) {
+            var imageCrystal = $("<img>");
+            imageCrystal.addClass("crystal-image");
+            imageCrystal.attr("src", imagesArr[Math.floor(Math.random() * 4)])
+            imageCrystal.attr("data-crystalvalue", parseInt(numberOptions[i]));
+            $("#crystals").append(imageCrystal);
+        }
+
+
+        $(".crystal-image").on("click", function () {
+
+            var crystalValue = ($(this).attr("data-crystalvalue"));
+            crystalValue = parseInt(crystalValue);
+
+            counter += crystalValue;
+
+
+            alert("New score: " + counter);
+
+            if (counter === targetNumber) {
+                alert("You win!");
+            }
+
+            else if (counter >= targetNumber) {
+                alert("You lose!!");
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
